@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+
 	"github.com/codiechanel/go-demo/utils"
-		"io/ioutil"
-	"log"
+
 	"net/http"
-	
 )
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
@@ -20,17 +20,27 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(data))
 }
 
+func vals() (int, int) {
+	return 3, 7
+}
 
 func main() {
 
 	fmt.Println(utils.WorkingDir())
 	fmt.Println(utils.CurrentDir("nice"))
-		utils.ShowOne()
+	utils.ShowOne()
 
 	utils.ParseJSON(`{"num":6.13,"strs":["a","b"]}`)
 
 	utils.ParseRSS()
 
 	utils.StartThread()
+
+	a, b := vals()
+	fmt.Println(a)
+	fmt.Println(b)
+
+	_, c := vals()
+	fmt.Println(c)
 
 }
