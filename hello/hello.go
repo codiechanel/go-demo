@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-
 	"github.com/codiechanel/go-demo/utils"
 )
 
@@ -16,5 +15,6 @@ func main() {
 
 	utils.ParseJSON(`{"num":6.13,"strs":["a","b"]}`)
 
+	utils.ParseRSS()
 
 }
