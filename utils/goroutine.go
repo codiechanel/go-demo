@@ -18,5 +18,9 @@ func say(s string) {
 func StartThread() {
 	go say("world")
 	say("hello")
+	// this is supported in new versions
+	//  go func(msg string) {
+    //     fmt.Println(msg)
+    // }("going")
 
 }
