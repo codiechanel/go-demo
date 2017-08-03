@@ -5,8 +5,9 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"github.com/cheggaaa/pb"
 	"time"
+
+	"github.com/cheggaaa/pb"
 
 	"github.com/codiechanel/go-demo/utils"
 )
@@ -49,7 +50,7 @@ func main() {
 
 	var fileName = "cool.zip"
 
-		file, err := os.Create("cool.zip")
+	file, err := os.Create("cool.zip")
 
 	if err != nil {
 		fmt.Println(err)
@@ -57,33 +58,31 @@ func main() {
 	}
 	defer file.Close()
 
-
-
 	go func() {
-	        n, err := io.Copy(file, response.Body)
-	        if n != filesize {
-	            fmt.Println("Truncated")
-	        }
-	        if err != nil {
-	            fmt.Printf("Error: %v", err)
-	        }
-		}()
-		
-			countSize := int(filesize / 1000)
-		bar := pb.StartNew(countSize) // start new progressbar
-		var fi os.FileInfo // get file information from os
-		for fi == nil || fi.Size() < filesize { // for like while
-			fi, _ = file.Stat() // File status
-			bar.Set(int(fi.Size() / 1000)) // File size / 1000
-			time.Sleep(time.Millisecond) // wait millisecond
+		n, err := io.Copy(file, response.Body)
+		if n != filesize {
+			fmt.Println("Truncated")
 		}
-		finishMessage := fmt.Sprintf("\n%s with %v bytes downloaded",
-		 fileName, filesize)
-		bar.FinishPrint(finishMessage) // finished messages
-
 		if err != nil {
-			panic(err)
+			fmt.Printf("Error: %v", err)
 		}
+	}()
+
+	countSize := int(filesize / 1000)
+	bar := pb.StartNew(countSize)           // start new progressbar
+	var fi os.FileInfo                      // get file information from os
+	for fi == nil || fi.Size() < filesize { // for like while
+		fi, _ = file.Stat()            // File status
+		bar.Set(int(fi.Size() / 1000)) // File size / 1000
+		time.Sleep(time.Millisecond)   // wait millisecond
+	}
+	finishMessage := fmt.Sprintf("\n%s with %v bytes downloaded",
+		fileName, filesize)
+	bar.FinishPrint(finishMessage) // finished messages
+
+	if err != nil {
+		panic(err)
+	}
 
 }
 
@@ -105,19 +104,19 @@ func Copy(response *http.Response, filesize int64, fileName string) {
 	}
 
 	countSize := int(filesize / 1000)
-		bar := pb.StartNew(countSize) // start new progressbar
-		var fi os.FileInfo // get file information from os
-		for fi == nil || fi.Size() < filesize { // for like while
-			fi, _ = file.Stat() // File status
-			bar.Set(int(fi.Size() / 1000)) // File size / 1000
-			time.Sleep(time.Millisecond) // wait millisecond
-		}
-		finishMessage := fmt.Sprintf("\n%s with %v bytes downloaded",
-		 fileName, filesize)
-		bar.FinishPrint(finishMessage) // finished messages
+	bar := pb.StartNew(countSize)           // start new progressbar
+	var fi os.FileInfo                      // get file information from os
+	for fi == nil || fi.Size() < filesize { // for like while
+		fi, _ = file.Stat()            // File status
+		bar.Set(int(fi.Size() / 1000)) // File size / 1000
+		time.Sleep(time.Millisecond)   // wait millisecond
+	}
+	finishMessage := fmt.Sprintf("\n%s with %v bytes downloaded",
+		fileName, filesize)
+	bar.FinishPrint(finishMessage) // finished messages
 
-		if err != nil {
-			panic(err)
-		}
+	if err != nil {
+		panic(err)
+	}
 
 }
