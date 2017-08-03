@@ -8,6 +8,7 @@
             "command": "go run ${workspaceRoot}\\hello\\hello.go",
             // "command": "echo  ${workspaceRoot}",
             
+            
             "type": "shell"
         }
     ]

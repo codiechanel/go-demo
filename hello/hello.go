@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/codiechanel/go-demo/utils"
+)
 
 func main() {
-	fmt.Printf("Hello, world.\n")
+
+	fmt.Println(utils.WorkingDir())
+	fmt.Println(utils.CurrentDir("nice"))
+	utils.ParseXml("Castle.xml")
 }
