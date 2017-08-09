@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
+	"os"
+	"log"
+	"github.com/codiechanel/go-demo/tar"
 
 	"github.com/codiechanel/go-demo/utils"
 
@@ -36,11 +40,13 @@ func main() {
 
 	utils.StartThread()
 
-	a, b := vals()
-	fmt.Println(a)
-	fmt.Println(b)
+	var r io.Reader
+	var err error
+	r, err = os.Open("./aboard.tar.gz")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	_, c := vals()
-	fmt.Println(c)
+	tar.Untar("cool", r)
 
 }
